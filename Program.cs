@@ -12,14 +12,26 @@ namespace CalcInterface
         {
             Logger = new Logger();
             Console.WriteLine("Введите 2 целочисленных значения: ");
+            int a = 0, b = 0;
             try
             {
-                int a = Convert.ToInt32(Console.ReadLine());
-                int b = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введите значение a: ");
+                a = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("Введите значение b: ");
+                b = Convert.ToInt32(Console.ReadLine());
             }
-            catch (System.FormatException)
+            catch (FormatException)
             {
-                Console.WriteLine("Неверно введены значения");
+                Console.WriteLine("Ошибка: Неверно введены значения. Пожалуйста, введите целые числа.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Ошибка: Введенное значение слишком велико или слишком мало. Пожалуйста, введите целое число в допустимом диапазоне.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Неизвестная ошибка: {ex.Message}");
             }
             var fin1 = new Fin1(Logger);
             MiniCalc minicalc = new MiniCalc();
